@@ -1,13 +1,15 @@
 package co.simplon.collections;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import co.simplon.collections.modele.Animal;
 
 public class MapMain {
 	public static void main(String[] args) {
-		Map<String, Animal> mesAnimaux = new HashMap<String, Animal>();
+		Map<String, Animal> mesAnimaux = new HashMap<>();
 
 		// ajouts
 		Animal chat = new Animal("Chat", 20);
@@ -36,16 +38,18 @@ public class MapMain {
 		// parcours des valeurs
 		System.out.println();
 		System.out.println("Les races d'animaux connues à la maison sont :");
-		for (Animal animal : mesAnimaux.values()) {
+		Collection<Animal> mesRacesAvecDoublons = mesAnimaux.values();
+		HashSet<Animal> mesRacesSansDoublons = new HashSet<Animal>(mesRacesAvecDoublons);
+		for (Animal animal : mesRacesSansDoublons) {
 			System.out.println(animal.getRace());
 		}
 
 		// Mise à jour d'un élément
 		System.out.println();
-		Animal animalAvant = mesAnimaux.put("Popeye", new Animal("Souris", 2));
+		Animal animalAvant = mesAnimaux.put("PopeyE", new Animal("Souris", 2));
 		Animal animalApres = mesAnimaux.get("Popeye");
-		System.out.println("Popeye est un.e " + animalApres.getRace()
-				+ " alors qu'avant il était un.e " + animalAvant.getRace());
+		System.out.println("Popeye est un.e " + animalApres
+				+ " alors qu'avant il était un.e " + animalAvant);
 
 		// Suppression d'un élément
 		System.out.println();
